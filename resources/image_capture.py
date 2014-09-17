@@ -6,7 +6,6 @@ Created on Sep 15, 2014
 '''
 import cv2 as cv
 import numpy as np
-import os
 
 class Image(object):
 
