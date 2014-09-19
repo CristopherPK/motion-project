@@ -33,10 +33,11 @@ class CaptureManager(object):
     def frame(self):
         if self._enteredFrame and self._frame is None:
             _, self._frame = self._capture.retrieve(channel = self.channel)
+            #print self._frame
             return self._frame
     
     @property    
-    def isWritingImage (self):
+    def isWritingImage(self):
         return self._imageFilename is not None
     
     @property
@@ -58,7 +59,9 @@ class CaptureManager(object):
         
         # The getter may retrieve and cache the frame.
         if self.frame is None:
+            print self.frame
             self._enteredFrame = False
+            print self._enteredFrame
             return
         
         # Update the FPS estimate and related variables.
