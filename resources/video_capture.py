@@ -50,6 +50,16 @@ class Video(object):
             videoWriter.write(frame)
             success, frame = videoCapture.read()
             
+    def showVideo(self, videoCapture, videoName):
+        cv.namedWindow(videoName)
+        print 'Showing camera feed. Click window or press any key to stop.'
+        success, frame = videoCapture.read()
+        while success and cv.waitKey(1) == -1:
+            cv.imshow(videoName, frame)
+            success, frame = videoCapture.read()
+        
+        cv.destroyWindow(videoName)
+            
 ########################################################################
 
 if __name__ == '__main__':
@@ -61,4 +71,5 @@ if __name__ == '__main__':
     
     print fps, size
     
-    video.write("videos/test.avi", videofile, 20, size) 
+    video.showVideo(videofile,"Megamind")
+    #video.write("videos/test.avi", videofile, 20, size) 
