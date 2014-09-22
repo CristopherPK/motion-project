@@ -2,7 +2,6 @@ import cv2
 import numpy
 import scipy.interpolate
 
-
 def createFlatView(array):
     """Return a 1D view of an array of any dimensionality."""
     flatView = array.view()
@@ -54,3 +53,12 @@ def createCompositeFunc(func0, func1):
     if func1 is None:
         return func0
     return lambda x: func0(func1(x))
+
+def isGray(image):
+    """Return True if the image has one channel per pixel."""
+    return image.ndim < 3
+
+def widthHeightDividedBy(image, divisor):
+    """Return an image's dimensions, divided by a value."""
+    h, w = image.shape[:2]
+    return (w/divisor, h/divisor)
