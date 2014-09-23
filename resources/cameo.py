@@ -10,7 +10,7 @@ class Cameo(object):
         self._windowManager = WindowManager('Cameo',
                                              self.onKeypress)
         self._captureManager = CaptureManager(
-            cv2.VideoCapture(0), self._windowManager, True)
+            cv2.VideoCapture("videos/Megamind.avi"), self._windowManager, False)
         self._faceTracker = FaceTracker()
         self._shouldDrawDebugRects = False
         self._curveFilter = filters.BGRPortraCurveFilter()
