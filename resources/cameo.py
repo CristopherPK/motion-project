@@ -10,7 +10,7 @@ class Cameo(object):
         self._windowManager = WindowManager('Cameo',
                                              self.onKeypress)
         self._captureManager = CaptureManager(
-            cv2.VideoCapture("videos/Megamind.avi"), self._windowManager, False)
+            cv2.VideoCapture(0), self._windowManager, False)
         self._faceTracker = FaceTracker()
         self._shouldDrawDebugRects = False
         self._curveFilter = filters.BGRPortraCurveFilter()
@@ -31,6 +31,12 @@ class Cameo(object):
             
                 filters.strokeEdges(frame, frame)
                 self._curveFilter.apply(frame, frame)
+                
+                #TODO: Convert colored image to gray. 
+                #TODO: Implement threshold (250,255)
+                #TODO: Mediana filter
+                #TODO: Labeling points
+                #TODO: Draw the line between those points.               
                 
                 if self._shouldDrawDebugRects:
                     self._faceTracker.drawDebugRects(frame)
