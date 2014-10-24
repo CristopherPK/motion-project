@@ -1,6 +1,7 @@
 import cv2
 import numpy
 import utils
+from cv2 import THRESH_BINARY
 
 
 def recolorRC(src, dst):
@@ -103,7 +104,16 @@ def strokeEdges(src, dst, blurKsize = 7, edgeKsize = 5):
     for channel in channels:
         channel[:] = channel * normalizedInverseAlpha
     cv2.merge(channels, dst)
-
+    
+def pointMarkers(src, dst, blurKsize = 9):
+    from scipy.ndimage.measurements import label
+    
+    ret, threshSrc = cv2.threshold(src,250,255,THRESH_BINARY)
+    blurredSrc = cv2.medianBlur(threshSrc, blurKsize)
+    labeledSrc, numFeatures = label(blurredSrc)
+    #cv2.addWeighted(src, 0.5, labeledSrc, 0.5, 0.0, dst)
+    dst = labeledSrc 
+    
 
 class VFuncFilter(object):
     """A filter that applies a function to V (or all of BGR)."""

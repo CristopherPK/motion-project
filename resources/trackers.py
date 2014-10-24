@@ -2,7 +2,11 @@ import cv2
 import rects
 import utils
 
-
+class HorseTracker(object):
+    '''
+    @todo: Tracker for horses features.
+    '''
+    
 class Face(object):
     """Data on facial features: face, eyes, nose, mouth."""
     
