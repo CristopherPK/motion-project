@@ -12,16 +12,24 @@ root = tree.getroot()
 children = root.find('Tracks')
 i = 0
 
-t = time
-
 for c in children.iter('Track'):
-    for track in c.iter('TrackPositionList'):
-        print "==============track============="
+    for _track in c.iter('TrackPositionList'):
         i+=1
-        for tr in track:
+        print "==============track" + str(i) + "============="
+        track = (0,0,0)
+        for tr in _track:
             x = tr.attrib.get('UserX')
+            l = len(x)
+            x = x[0:l-3]
+            x = int(x)
             y = tr.attrib.get('UserY')
+            l = len(y)
+            y = y[0:l-3]
+            y = int(y)
             t = tr.attrib.get('UserTime')
-            print x,y,t
-
-print i
+            l = len(t)
+            t = t[l-5:l-3] + t[l-2:l]
+            t = float(t)
+            t = t * 0.01
+            t = (x,y,t)
+            print t
