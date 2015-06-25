@@ -233,10 +233,10 @@ int main(int argc, char **argv)
         resize(cur2, cur2, cur.size());
 
         // Now draw the original and stablised side by side for coolness
-        Mat canvas = Mat::zeros(cur.rows, cur.cols*2+10, cur.type());
+        Mat canvas = Mat::zeros(cur.rows, cur.cols, cur.type());
 
-        cur.copyTo(canvas(Range::all(), Range(0, cur2.cols)));
-        cur2.copyTo(canvas(Range::all(), Range(cur2.cols+10, cur2.cols*2+10)));
+        //cur.copyTo(canvas(Range::all(), Range(0, cur2.cols)));
+        cur2.copyTo(canvas(Range::all(), Range(0, cur2.cols)));
 
         // If too big to fit on the screen, then scale it down by 2, hopefully it'll fit :)
         if(canvas.cols > 1920) {
