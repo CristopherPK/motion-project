@@ -20,10 +20,12 @@ massCentre <- function(tracks, massExpected){
         
     for (i in 1:nrow(xs)){
         ## Head (2-1)
-        lHead = sqrt((xs[,2][i] - xs[,1][i])^2 + (ys[,2][i] - ys[,1][i])^2)
+        lHead = 0.27
+        lHeadPxs = sqrt((xs[,2][i] - xs[,1][i])^2 + (ys[,2][i] - ys[,1][i])^2)
+        t = lHead/lHeadPxs
         massHead = 0.637/(0.226*(lHead)^2)
-        xHead = xs[,1][i] + (-0.09)*lHead
-        yHead = ys[,1][i] + 0.73*lHead
+        xHead = xs[,1][i]*t + (-0.09)*lHead
+        yHead = ys[,1][i]*t + 0.73*lHead
         if(is.null(head)){
             head <- data.frame(lHead = lHead, massHead = massHead, xHead = xHead, yHead = yHead)
         } else {
@@ -31,11 +33,13 @@ massCentre <- function(tracks, massExpected){
         }
         
         ## Neck (3-2)
-        lNeck = sqrt((xs[,3][i] - xs[,2][i])^2 + (ys[,3][i] - ys[,2][i])^2)
+        lNeck = 0.46
+        lNeckPxs = sqrt((xs[,3][i] - xs[,2][i])^2 + (ys[,3][i] - ys[,2][i])^2)
+        t = lNeck/lNeckPxs
         #massNeck = 26.8
         massNeck = (26.8*lNeck)/0.54
-        xNeck = xs[,2][i] + 0.11*lNeck
-        yNeck = ys[,2][i] + 0.46*lNeck
+        xNeck = xs[,2][i]*t + 0.11*lNeck
+        yNeck = ys[,2][i]*t + 0.46*lNeck
         if(is.null(neck)){
             neck <- data.frame(lNeck = lNeck, massNeck = massNeck, xNeck = xNeck, yNeck = yNeck)
         } else {
@@ -43,10 +47,12 @@ massCentre <- function(tracks, massExpected){
         }
         
         ## Trunk (4-3)
-        lTrunk = sqrt((xs[,4][i] - xs[,3][i])^2 + (ys[,4][i] - ys[,3][i])^2)
+        lTrunk = 1.23
+        lTrunkPxs = sqrt((xs[,4][i] - xs[,3][i])^2 + (ys[,4][i] - ys[,3][i])^2)
+        t = lTrunk/lTrunkPxs
         massTrunk = 58.24/(0.0676*(lTrunk)^2)
-        xTrunk = xs[,4][i] + (-0.103)*lTrunk
-        yTrunk = ys[,4][i] + (0.469)*lTrunk
+        xTrunk = xs[,4][i]*t + (-0.103)*lTrunk
+        yTrunk = ys[,4][i]*t + (0.469)*lTrunk
         if(is.null(trunk)){
             trunk <- data.frame(lTrunk = lTrunk, massTrunk = massTrunk, xTrunk = xTrunk, yTrunk = yTrunk)
         } else {
@@ -54,7 +60,9 @@ massCentre <- function(tracks, massExpected){
         }
         
         ## Tail (4-5)
-        lTail = sqrt((xs[,4][i] - xs[,5][i])^2 + (ys[,4][i] - ys[,5][i])^2)
+        lTail = 0.62
+        lTailPxs = sqrt((xs[,4][i] - xs[,5][i])^2 + (ys[,4][i] - ys[,5][i])^2)
+        t = lTail/lTailPxs 
         massTail = 10.646*lTail - 3.824
         xTail = xs[,4][i] + (0.03)*lTail
         yTail = ys[,4][i] + (0.73)*lTail
@@ -65,10 +73,12 @@ massCentre <- function(tracks, massExpected){
         }
         
         ## Scapula (6-7)
-        lScapula = sqrt((xs[,7][i] - xs[,6][i])^2 + (ys[,7][i] - ys[,6][i])^2)
+        lScapula = 0.28
+        lScapulaPxs = sqrt((xs[,7][i] - xs[,6][i])^2 + (ys[,7][i] - ys[,6][i])^2)
+        t = lScapula/lScapulaPxs
         massScapula = 41.83*lScapula + 0.047
-        xScapula = xs[,6][i] + (-0.12)*lScapula
-        yScapula = ys[,6][i] + (0.27)*lScapula
+        xScapula = xs[,6][i]*t + (-0.12)*lScapula
+        yScapula = ys[,6][i]*t + (0.27)*lScapula
         if(is.null(scapula)){
             scapula <- data.frame(lScapula = lScapula, massScapula = massScapula, xScapula = xScapula, yScapula = yScapula)
         } else {
@@ -76,10 +86,12 @@ massCentre <- function(tracks, massExpected){
         }
         
         ## Brachium (7-8)
-        lBrachium = sqrt((xs[,8][i] - xs[,7][i])^2 + (ys[,8][i] - ys[,7][i])^2)
+        lBrachium = 0.24
+        lBrachiumPxs = sqrt((xs[,8][i] - xs[,7][i])^2 + (ys[,8][i] - ys[,7][i])^2)
         massBrachium = 0.183/(0.076*(lBrachium)^2)
-        xBrachium = xs[,7][i] + (-0.05)*lBrachium
-        yBrachium = ys[,7][i] + (0.51)*lBrachium
+        t = lBrachium/lBrachiumPxs
+        xBrachium = xs[,7][i]*t + (-0.05)*lBrachium
+        yBrachium = ys[,7][i]*t + (0.51)*lBrachium
         if(is.null(brachium)){
             brachium <- data.frame(lBrachium = lBrachium, massBrachium = massBrachium, xBrachium = xBrachium, yBrachium = yBrachium)
         } else {
@@ -87,10 +99,12 @@ massCentre <- function(tracks, massExpected){
         }
         
         ## Antebrachium(8-9)
-        lAntBrach = sqrt((xs[,9][i] - xs[,8][i])^2 + (ys[,9][i] - ys[,8][i])^2)
+        lAntBrach = 0.40
+        lAntBrachPxs = sqrt((xs[,9][i] - xs[,8][i])^2 + (ys[,9][i] - ys[,8][i])^2)
+        t = lAntBrach/lAntBrachPxs
         massAntBrach = 17.76*lAntBrach - 1.017
-        xAntBrach = xs[,8][i] + (-0.021)*lAntBrach
-        yAntBrach = ys[,8][i] + (0.35)*lAntBrach
+        xAntBrach = xs[,8][i]*t + (-0.021)*lAntBrach
+        yAntBrach = ys[,8][i]*t + (0.35)*lAntBrach
         if(is.null(antebrachium)){
             antebrachium <- data.frame(lAntebrachium = lAntBrach, massAntBrach = massAntBrach, xAntBrach = xAntBrach, yAntBrach = yAntBrach)
         } else {
@@ -98,10 +112,12 @@ massCentre <- function(tracks, massExpected){
         }
         
         ## Metacarpus (9-10)
-        lMetacarpus = sqrt((xs[,10][i] - xs[,9][i])^2 + (ys[,10][i] - ys[,9][i])^2)
+        lMetacarpus = 0.27
+        lMetacarpusPxs = sqrt((xs[,10][i] - xs[,9][i])^2 + (ys[,10][i] - ys[,9][i])^2)
+        t = lMetacarpus/lMetacarpusPxs
         massMetacps = 0.01195/(0.0913*(lMetacarpus)^2)
-        xMetacarpus = xs[,9][i] + (-0.01)*lMetacarpus
-        yMetacarpus = ys[,9][i] + (0.44)*lMetacarpus
+        xMetacarpus = xs[,9][i]*t + (-0.01)*lMetacarpus
+        yMetacarpus = ys[,9][i]*t + (0.44)*lMetacarpus
         if(is.null(metacarpus)){
             metacarpus <- data.frame(lMetacarpus = lMetacarpus, massMetacps = massMetacps, xMetacarpus = xMetacarpus, yMetacarpus = yMetacarpus)
         } else {
@@ -109,10 +125,12 @@ massCentre <- function(tracks, massExpected){
         }
         
         ## Digit Forelimb (10-11)
-        lDigitF = sqrt((xs[,11][i] - xs[,10][i])^2 + (ys[,11][i] - ys[,10][i])^2)
+        lDigitF = 0.15
+        lDigitFPxs = sqrt((xs[,11][i] - xs[,10][i])^2 + (ys[,11][i] - ys[,10][i])^2)
+        t = lDigitF/lDigitFPxs
         massDigitF = 0.0096/(0.307*(lDigitF)^2)
-        xDigitF = xs[,10][i] + (-0.18)*lDigitF
-        yDigitF = ys[,10][i] + (0.92)*lDigitF
+        xDigitF = xs[,10][i]*t + (-0.18)*lDigitF
+        yDigitF = ys[,10][i]*t + (0.92)*lDigitF
         if(is.null(digitf)){
             digitf <- data.frame(lDigitF = lDigitF, massDigitF = massDigitF, xDigitF = xDigitF, yDigitF = yDigitF)
         } else {
@@ -120,10 +138,12 @@ massCentre <- function(tracks, massExpected){
         }
         
         ## Thigh (13-14)
-        lThigh = sqrt((xs[,13][i] - xs[,12][i])^2 + (ys[,13][i] - ys[,12][i])^2)
+        lThigh = 0.30
+        lThighPxs = sqrt((xs[,13][i] - xs[,12][i])^2 + (ys[,13][i] - ys[,12][i])^2)
+        t = lThigh/lThighPxs        
         massThigh = 18.6*(lThigh/0.36) ## lThigh is not in meters!
-        xThigh = xs[,12][i] + (-0.12)*lThigh
-        yThigh = ys[,12][i] + (0.59)*lThigh
+        xThigh = xs[,12][i]*t + (-0.12)*lThigh
+        yThigh = ys[,12][i]*t + (0.59)*lThigh
         if(is.null(thigh)){
             thigh <- data.frame(lThigh = lThigh, massThigh = massThigh, xThigh = xThigh, yThigh = yThigh)
         } else {
@@ -131,10 +151,12 @@ massCentre <- function(tracks, massExpected){
         }
         
         ## Crus (14-15)
-        lCrus = sqrt((xs[,14][i] - xs[,13][i])^2 + (ys[,14][i] - ys[,13][i])^2)
+        lCrus = 0.54
+        lCrusPxs = sqrt((xs[,14][i] - xs[,13][i])^2 + (ys[,14][i] - ys[,13][i])^2)
+        t = lCrus/lCrusPxs
         massCrus = 18.53*lCrus + 0.242
-        xCrus = xs[,13][i] + (-0.084)*lCrus
-        yCrus = ys[,13][i] + (0.379)*lCrus
+        xCrus = xs[,13][i]*t + (-0.084)*lCrus
+        yCrus = ys[,13][i]*t + (0.379)*lCrus
         if(is.null(crus)){
             crus <- data.frame(lCrus = lCrus, massCrus = massCrus, xCrus = xCrus, yCrus = yCrus)
         } else {
@@ -142,10 +164,12 @@ massCentre <- function(tracks, massExpected){
         }
         
         ## Metatarsus (15-16)
-        lMetatarsus = sqrt((xs[,15][i] - xs[,14][i])^2 + (ys[,15][i] - ys[,14][i])^2)
+        lMetatarsus = 0.37
+        lMetatarsusPxs = sqrt((xs[,15][i] - xs[,14][i])^2 + (ys[,15][i] - ys[,14][i])^2)
+        t = lMetatarsus/lMetatarsusPxs
         massMetatrs = 5.753*lMetatarsus + 0.812
-        xMetatrs = xs[,14][i] + (-0.067)*lMetatarsus
-        yMetatrs = ys[,14][i] + (0.32)*lMetatarsus
+        xMetatrs = xs[,14][i]*t + (-0.067)*lMetatarsus
+        yMetatrs = ys[,14][i]*t + (0.32)*lMetatarsus
         if(is.null(metatarsus)){
             metatarsus <- data.frame(lMetatarsus = lMetatarsus, massMetatrs = massMetatrs, xMetatrs = xMetatrs, yMetatrs = yMetatrs)
         } else {
@@ -153,11 +177,13 @@ massCentre <- function(tracks, massExpected){
         }
         
         ## Digit Hindlimb (16-17)
-        lDigitH = sqrt((xs[,16][i] - xs[,15][i])^2 + (ys[,16][i] - ys[,15][i])^2)
+        lDigitH = 0.17
+        lDigitHPxs = sqrt((xs[,16][i] - xs[,15][i])^2 + (ys[,16][i] - ys[,15][i])^2)
+        t = lDigitH/lDigitHPxs
         #massDigitH = 0.00254*massExpected + 0.504
         massDigitH = (1.87*lDigitH)/0.135
-        xDigitH = xs[,15][i] + 0.92*lDigitH
-        yDigitH = ys[,15][i] + (-0.18)*lDigitH
+        xDigitH = xs[,15][i]*t + 0.92*lDigitH
+        yDigitH = ys[,15][i]*t + (-0.18)*lDigitH
         if(is.null(digith)){
             digith <- data.frame(lDigitH = lDigitH, massDigitH = massDigitH, xDigitH = xDigitH, yDigitH = yDigitH)
         } else {
@@ -183,8 +209,8 @@ massCentre <- function(tracks, massExpected){
     massCentreData 
 }
 
-plot(lowess(x = mcData$xBCM,y = mcData$yBCM,f = 0.05),type = 'l',ylim = c(0,5))
+plot(lowess(x = mcData$xBCM,y = mcData$yBCM,f = 0.05),type = 'l',ylim = c(0,8))
 
-plot(x = mcData$xBCM, y = mcData$yBCM, ylim = c(0,5))
+plot(x = mcData$xBCM, y = mcData$yBCM, ylim = c(0,8))
 
 plot(x = mcData$xBCM, y = mcData$yBCM)
