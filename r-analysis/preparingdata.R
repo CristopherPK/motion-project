@@ -5,13 +5,13 @@ preparingData <- function(path = "tracks"){
     ys <- NULL
     
     for (t in tracksFile){
-        dt <- read.table(file = t, dec=",")
+        dt <- read.table(file = t, dec=".")
         if(is.null(xs)){
-            xs <- data.frame(dt$V2)
-            ys <- data.frame(dt$V3)
+            xs <- data.frame(dt$V1)
+            ys <- data.frame(dt$V2)
         } else {
-            xs <- cbind(xs, dt$V2[1:nrow(xs)])
-            ys <- cbind(ys, dt$V3[1:nrow(ys)])
+            xs <- cbind(xs, dt$V1[1:nrow(xs)])
+            ys <- cbind(ys, dt$V2[1:nrow(ys)])
         }
     }
     
